@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-bank
+  docker:
+    compose:
+      # compose.yaml est à la racine du dépôt, partagé par le back et le front
+      file: ../compose.yaml
