@@ -1,5 +1,8 @@
 # Spring Bank
 
+[![Backend](https://github.com/Soulflys02/spring-bank/actions/workflows/backend.yml/badge.svg)](https://github.com/Soulflys02/spring-bank/actions/workflows/backend.yml)
+[![Frontend](https://github.com/Soulflys02/spring-bank/actions/workflows/frontend.yml/badge.svg)](https://github.com/Soulflys02/spring-bank/actions/workflows/frontend.yml)
+
 A fictional online bank, built as a learning project. Customers open accounts, deposit money and send transfers, and every movement is recorded in a double-entry ledger.
 
 > Spring Bank is not a real bank and is not affiliated with any existing bank.
