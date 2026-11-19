@@ -33,7 +33,9 @@ cd backend
 ./mvnw spring-boot:run
 ```
 
-Spring Boot starts PostgreSQL through Docker Compose, using `compose.yaml` at the repository root. The API listens on http://localhost:8080. Its endpoints are secured by Spring Security defaults until Keycloak is wired in.
+Spring Boot starts PostgreSQL through Docker Compose, using `compose.yaml` at the repository root. The API listens on http://localhost:8080.
+
+The API documentation is available at http://localhost:8080/swagger-ui.html. Every other endpoint requires authentication, which Keycloak will provide.
 
 ### Frontend
 
