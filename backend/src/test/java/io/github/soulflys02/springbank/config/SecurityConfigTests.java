@@ -1,5 +1,6 @@
 package io.github.soulflys02.springbank.config;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.web.servlet.MockMvc;
 
 import io.github.soulflys02.springbank.TestcontainersConfiguration;
@@ -35,10 +37,23 @@ public class SecurityConfigTests {
                 .andExpect(status().isOk());
     }
 
-    // 403 as long as no login method is configured, 401 once Keycloak is wired in
     @Test
     void apiIsProtected() throws Exception {
         mockMvc.perform(get("/api/v1/accounts"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void clientCannotAccessBackOffice() throws Exception {
+        mockMvc.perform(get("/api/v1/admin/customers")
+                .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_client"))))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void backOfficeCanAccessBackOffice() throws Exception {
+        mockMvc.perform(get("/api/v1/admin/customers")
+                .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_backoffice"))))
+                .andExpect(status().isNotFound());
     }
 }

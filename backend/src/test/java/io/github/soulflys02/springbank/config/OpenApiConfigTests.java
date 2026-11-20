@@ -27,4 +27,12 @@ public class OpenApiConfigTests {
                 .andExpect(jsonPath("$.info.title").value("Spring Bank API"))
                 .andExpect(jsonPath("$.info.version").value("v1"));
     }
+
+    @Test
+    void apiDocsDeclareKeycloakLogin() throws Exception {
+        mockMvc.perform(get("/v3/api-docs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.components.securitySchemes.keycloak.flows.authorizationCode.authorizationUrl")
+                        .value("http://localhost:8081/realms/spring-bank/protocol/openid-connect/auth"));
+    }
 }

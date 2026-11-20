@@ -5,3 +5,14 @@ spring:
     compose:
       # compose.yaml est à la racine du dépôt, partagé par le back et le front
       file: ../compose.yaml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/spring-bank
+
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: spring-bank-front
+      use-pkce-with-authorization-code-grant: true
