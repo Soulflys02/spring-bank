@@ -11,7 +11,7 @@ A fictional online bank, built as a learning project. Customers open accounts, d
 
 - **Backend:** Java 25, Spring Boot 4.1, Spring Data JPA, Flyway, PostgreSQL
 - **Frontend:** Angular 22, Angular Material
-- **Authentication:** Keycloak (planned)
+- **Authentication:** Keycloak 26
 - **Tests:** JUnit 5, Testcontainers, Vitest
 
 ## Status
@@ -33,7 +33,7 @@ cd backend
 ./mvnw spring-boot:run
 ```
 
-Spring Boot starts PostgreSQL through Docker Compose, using `compose.yaml` at the repository root. The API listens on http://localhost:8080.
+Spring Boot starts PostgreSQL and Keycloak through Docker Compose, using `compose.yaml` at the repository root. The API listens on http://localhost:8080.
 
 The API documentation is available at http://localhost:8080/swagger-ui.html. Every other endpoint requires authentication, which Keycloak will provide.
 
@@ -48,11 +48,30 @@ npm start
 
 The app runs on http://localhost:4200. Calls to `/api` are proxied to the backend.
 
+### Keycloak
+
+The admin console runs on http://localhost:8081 (`admin` / `admin`). On first start, Keycloak imports the `spring-bank` realm from `keycloak/spring-bank-realm.json`.
+
+Test accounts:
+
+| Username | Password | Roles |
+|---|---|---|
+| `backoffice` | `backoffice` | `backoffice`, `client` |
+
+After changing the realm in the admin console, export it back into the repository and commit the file:
+
+```bash
+docker compose exec keycloak /opt/keycloak/bin/kc.sh export --dir /opt/keycloak/data/import --realm spring-bank --users realm_file
+```
+
+To start again from the exported file, remove the containers and their data with `docker compose down -v`.
+
 ## Project structure
 
 ```
 spring-bank/
 ├── backend/       Spring Boot API
 ├── frontend/      Angular app
-└── compose.yaml   Local services (PostgreSQL)
+├── keycloak/      Exported Keycloak realm
+└── compose.yaml   Local services (PostgreSQL, Keycloak)
 ```
