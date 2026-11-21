@@ -19,6 +19,8 @@
     "@angular/material": "^22.3.0",
     "@angular/platform-browser": "^22.3.0",
     "@angular/router": "^22.3.0",
+    "keycloak-angular": "^22.0.0",
+    "keycloak-js": "^26.2.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -30,5 +32,12 @@
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
     "vitest": "^5.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "@parcel/watcher@2.6.0": true,
+    "fsevents@2.3.3": true,
+    "lmdb@3.5.9": true,
+    "msgpackr-extract@3.0.7": true
   }
 }

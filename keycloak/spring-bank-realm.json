@@ -1,6 +1,8 @@
 {
   "id" : "4dcb3ed8-a75f-4021-8edf-89309112870e",
   "realm" : "spring-bank",
+  "displayName" : "Spring bank",
+  "displayNameHtml" : "",
   "notBefore" : 0,
   "defaultSignatureAlgorithm" : "RS256",
   "revokeRefreshToken" : false,
@@ -445,6 +447,29 @@
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "backoffice", "default-roles-spring-bank" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "2a7740c2-c074-4c4e-a324-41c5103e7175",
+    "username" : "client",
+    "firstName" : "client",
+    "lastName" : "client",
+    "email" : "client@spring-bank.test",
+    "emailVerified" : true,
+    "enabled" : true,
+    "createdTimestamp" : 1795259416711,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "d188aaad-578c-4c3a-a309-b1a380ebd1b9",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1795259437868,
+      "secretData" : "{\"value\":\"9zauyWNh8Unxfrdk7x0fIk8MP7bjEXv9znZRNN87yUc=\",\"salt\":\"nAPp4baPcuGc+UdzVqoFcw==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-spring-bank" ],
     "notBefore" : 0,
     "groups" : [ ]
   } ],
@@ -1444,7 +1469,7 @@
       "subType" : "anonymous",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper", "saml-role-list-mapper", "saml-user-attribute-mapper", "oidc-usermodel-attribute-mapper", "oidc-full-name-mapper", "oidc-usermodel-property-mapper" ]
+        "allowed-protocol-mapper-types" : [ "saml-user-attribute-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-full-name-mapper", "oidc-usermodel-property-mapper", "oidc-address-mapper", "oidc-usermodel-attribute-mapper", "saml-user-property-mapper", "saml-role-list-mapper" ]
       }
     }, {
       "id" : "fe14c7f8-afa3-46dd-ae06-34efe6a5e8c0",
@@ -1453,7 +1478,7 @@
       "subType" : "authenticated",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-user-attribute-mapper", "oidc-usermodel-attribute-mapper", "oidc-full-name-mapper", "oidc-address-mapper", "saml-user-property-mapper", "oidc-usermodel-property-mapper", "saml-role-list-mapper", "oidc-sha256-pairwise-sub-mapper" ]
+        "allowed-protocol-mapper-types" : [ "saml-user-property-mapper", "oidc-usermodel-property-mapper", "oidc-address-mapper", "oidc-usermodel-attribute-mapper", "saml-role-list-mapper", "saml-user-attribute-mapper", "oidc-full-name-mapper", "oidc-sha256-pairwise-sub-mapper" ]
       }
     }, {
       "id" : "686d7bfd-45f7-4617-96da-ec54cacd299f",
@@ -2253,6 +2278,7 @@
   "attributes" : {
     "cibaBackchannelTokenDeliveryMode" : "poll",
     "cibaAuthRequestedUserHint" : "login_hint",
+    "acr.uri.map" : "{}",
     "clientOfflineSessionMaxLifespan" : "0",
     "oauth2DevicePollingInterval" : "5",
     "clientSessionIdleTimeout" : "0",
@@ -2261,9 +2287,12 @@
     "realmReusableOtpCode" : "false",
     "cibaExpiresIn" : "120",
     "oauth2DeviceCodeLifespan" : "600",
+    "saml.signature.algorithm" : "",
     "parRequestUriLifespan" : "60",
     "clientSessionMaxLifespan" : "0",
-    "scimApiEnabled" : "false"
+    "frontendUrl" : "",
+    "scimApiEnabled" : "false",
+    "acr.loa.map" : "{}"
   },
   "keycloakVersion" : "26.8.2",
   "userManagedAccessAllowed" : false,
