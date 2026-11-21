@@ -9,6 +9,7 @@ import {
   provideKeycloak,
 } from 'keycloak-angular';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { errorInterceptor } from './errors/error-interceptor';
 
 const apiCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
   urlPattern: /^\/api\//,
@@ -33,6 +34,6 @@ export const appConfig: ApplicationConfig = {
     },
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([includeBearerTokenInterceptor])),
+    provideHttpClient(withInterceptors([includeBearerTokenInterceptor, errorInterceptor])),
   ],
 };
