@@ -35,7 +35,7 @@ cd backend
 
 Spring Boot starts PostgreSQL and Keycloak through Docker Compose, using `compose.yaml` at the repository root. The API listens on http://localhost:8080.
 
-The API documentation is available at http://localhost:8080/swagger-ui.html. Every other endpoint requires authentication, which Keycloak will provide.
+The API documentation is available at http://localhost:8080/swagger-ui.html. Every other endpoint requires a Keycloak access token: click Authorize in Swagger UI and log in with a test account.
 
 ### Frontend
 
@@ -46,7 +46,7 @@ npm install
 npm start
 ```
 
-The app runs on http://localhost:4200. Calls to `/api` are proxied to the backend.
+The app runs on http://localhost:4200 and sends you straight to the Keycloak login page, so start the backend first: it is the one that starts Keycloak. Calls to `/api` are proxied to the backend and carry the access token.
 
 ### Keycloak
 
@@ -56,6 +56,7 @@ Test accounts:
 
 | Username | Password | Roles |
 |---|---|---|
+| `client` | `client` | `client` |
 | `backoffice` | `backoffice` | `backoffice`, `client` |
 
 After changing the realm in the admin console, export it back into the repository and commit the file:
