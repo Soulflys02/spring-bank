@@ -19,9 +19,22 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import io.github.soulflys02.springbank.customer.CustomerAlreadyExistsException;
+import io.github.soulflys02.springbank.customer.CustomerNotFoundException;
+
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(ApiExceptionHandler.class);
+
+    @ExceptionHandler(CustomerNotFoundException.class)
+    ProblemDetail handleCustomerNotFound() {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, "Customer not found.");
+    }
+
+    @ExceptionHandler(CustomerAlreadyExistsException.class)
+    ProblemDetail handleCustomerAlreadyExists() {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, "Customer already exists.");
+    }
 
     @ExceptionHandler(Exception.class)
     ProblemDetail handleUnexpectedException(Exception ex) {
