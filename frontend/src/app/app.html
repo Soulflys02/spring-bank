@@ -2,6 +2,7 @@
   <span>Spring Bank</span>
   <span class="spacer"></span>
   <span>{{ userName }}</span>
-  <button matButton (click)="logout()">Logout</button>
+  <button matButton (click)="openProfile()" data-testid="profile">My profile</button>
+  <button matButton (click)="logout()" data-testid="logout">Logout</button>
 </mat-toolbar>
 <router-outlet />
