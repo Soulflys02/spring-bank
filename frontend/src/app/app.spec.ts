@@ -3,15 +3,15 @@ import { TestBed } from '@angular/core/testing';
 import Keycloak from 'keycloak-js';
 import { of, throwError } from 'rxjs';
 import type { Mock } from 'vitest';
+import { CustomerResponse } from './api/model/customer-response';
 import { App } from './app';
-import { Customer } from './customer/customer';
 import { CustomerApi } from './customer/customer-api';
 
 describe('App', () => {
   let keycloak: { tokenParsed: { name: string }; logout: Mock; accountManagement: Mock };
   let customerApi: { getMe: Mock; create: Mock };
 
-  const customer: Customer = {
+  const customer: CustomerResponse = {
     firstName: 'Ada',
     lastName: 'Lovelace',
     email: 'ada.lovelace@example.com',

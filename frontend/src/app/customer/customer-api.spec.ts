@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { CustomerApi } from './customer-api';
-import { Customer } from './customer';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { firstValueFrom } from 'rxjs';
+import { CustomerResponse } from '../api/model/customer-response';
 import { HANDLED_ERROR_STATUSES } from '../errors/error-interceptor';
 
 describe('CustomerApi', () => {
   let service: CustomerApi;
   let httpTesting: HttpTestingController;
 
-  const customer: Customer = {
+  const customer: CustomerResponse = {
     firstName: 'Ada',
     lastName: 'Lovelace',
     email: 'ada.lovelace@example.com',
