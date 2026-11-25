@@ -1,0 +1,83 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "description" : "API of a fictional online bank.",
+    "title" : "Spring Bank API",
+    "version" : "v1"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "security" : [ {
+    "keycloak" : [ ]
+  } ],
+  "paths" : {
+    "/api/v1/customers" : {
+      "post" : {
+        "operationId" : "create",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CustomerResponse"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "customer-controller" ]
+      }
+    },
+    "/api/v1/customers/me" : {
+      "get" : {
+        "operationId" : "me",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CustomerResponse"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "customer-controller" ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "CustomerResponse" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "email", "firstName", "lastName" ]
+      }
+    },
+    "securitySchemes" : {
+      "keycloak" : {
+        "flows" : {
+          "authorizationCode" : {
+            "authorizationUrl" : "http://localhost:8081/realms/spring-bank/protocol/openid-connect/auth",
+            "scopes" : { },
+            "tokenUrl" : "http://localhost:8081/realms/spring-bank/protocol/openid-connect/token"
+          }
+        },
+        "type" : "oauth2"
+      }
+    }
+  }
+}

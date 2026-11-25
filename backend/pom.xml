@@ -137,4 +137,59 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<!-- Writes the OpenAPI contract to openapi.json: ./mvnw verify -Popenapi -DskipTests -->
+		<profile>
+			<id>openapi</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<mainClass>io.github.soulflys02.springbank.TestSpringBankApplication</mainClass>
+							<useTestClasspath>true</useTestClasspath>
+							<additionalClasspathElements>
+								<additionalClasspathElement>${project.build.testOutputDirectory}</additionalClasspathElement>
+							</additionalClasspathElements>
+							<jvmArguments>-Dspring.application.admin.enabled=true -Dspring.docker.compose.enabled=false</jvmArguments>
+						</configuration>
+						<executions>
+							<execution>
+								<id>start-for-openapi</id>
+								<goals>
+									<goal>start</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>stop-after-openapi</id>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.springdoc</groupId>
+						<artifactId>springdoc-openapi-maven-plugin</artifactId>
+						<version>1.6</version>
+						<configuration>
+							<apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
+							<outputDir>${project.basedir}</outputDir>
+							<outputFileName>openapi.json</outputFileName>
+						</configuration>
+						<executions>
+							<execution>
+								<id>generate-openapi</id>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>
